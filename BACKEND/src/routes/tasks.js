@@ -1,31 +1,31 @@
-const express = require("express");
-const router = express.Router();
-const Task = require("../models/Task");
+import express from "express";
+import Task from "../models/Task.js";
 
-// GET /tasks → Listar todas las tareas
+const router = express.Router();
+
+// 📌 GET todas las tareas
 router.get("/", async (req, res) => {
   try {
     const tasks = await Task.find().sort({ createdAt: -1 });
     res.json(tasks);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ error: "Error al obtener las tareas" });
   }
 });
 
-// POST /tasks → Crear nueva tarea
+// 📌 POST crear tarea
 router.post("/", async (req, res) => {
-  const { title, description, priority, status } = req.body;
-  const task = new Task({ title, description, priority, status });
-
   try {
-    const newTask = await task.save();
-    res.status(201).json(newTask);
+    const { title, description, priority } = req.body;
+    const task = new Task({ title, description, priority });
+    await task.save();
+    res.status(201).json(task);
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    res.status(400).json({ error: "Error al crear la tarea" });
   }
 });
 
-// PUT /tasks/:id → Actualizar tarea
+// 📌 PUT actualizar tarea (cualquier campo)
 router.put("/:id", async (req, res) => {
   try {
     const updatedTask = await Task.findByIdAndUpdate(
@@ -35,18 +35,33 @@ router.put("/:id", async (req, res) => {
     );
     res.json(updatedTask);
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    res.status(400).json({ error: "Error al actualizar la tarea" });
   }
 });
 
-// DELETE /tasks/:id → Eliminar tarea
+// 📌 PATCH cambiar estado (pendiente ↔ completado)
+router.patch("/:id/toggle", async (req, res) => {
+  try {
+    const task = await Task.findById(req.params.id);
+    if (!task) return res.status(404).json({ error: "Tarea no encontrada" });
+
+    task.status = task.status === "pending" ? "completed" : "pending";
+    await task.save();
+
+    res.json(task);
+  } catch (err) {
+    res.status(400).json({ error: "Error al cambiar el estado" });
+  }
+});
+
+// 📌 DELETE eliminar tarea
 router.delete("/:id", async (req, res) => {
   try {
     await Task.findByIdAndDelete(req.params.id);
-    res.json({ message: "Tarea eliminada correctamente" });
+    res.json({ message: "Tarea eliminada" });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(400).json({ error: "Error al eliminar la tarea" });
   }
 });
 
-module.exports = router;
+export default router;

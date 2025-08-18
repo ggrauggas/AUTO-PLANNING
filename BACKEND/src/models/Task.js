@@ -1,29 +1,29 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const taskSchema = new mongoose.Schema(
-  {
-    title: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    description: {
-      type: String,
-      default: "",
-      trim: true,
-    },
-    priority: {
-      type: String,
-      enum: ["low", "medium", "high"],
-      default: "medium",
-    },
-    status: {
-      type: String,
-      enum: ["pending", "in-progress", "completed"],
-      default: "pending",
-    },
+const taskSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+    trim: true,
   },
-  { timestamps: true } // Crea createdAt y updatedAt automáticamente
-);
+  description: {
+    type: String,
+    trim: true,
+  },
+  priority: {
+    type: String,
+    enum: ["low", "medium", "high"], // 🔹 solo acepta estos valores
+    default: "medium",
+  },
+  status: {
+    type: String,
+    enum: ["pending", "completed"], 
+    default: "pending",
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
 
-module.exports = mongoose.model("Task", taskSchema);
+export default mongoose.model("Task", taskSchema);

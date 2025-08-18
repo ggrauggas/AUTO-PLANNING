@@ -1,0 +1,121 @@
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: #f4f6f9;
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.add-btn {
+  display: block;
+  margin: 0 auto 20px auto;
+  background: #3182ce;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background: #2b6cb0;
+}
+
+/* GRID */
+.task-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+/* CARDS */
+.task-card {
+  position: relative;
+  padding: 15px;
+  border-radius: 10px;
+  color: #2d3748;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.task-card h3 {
+  margin: 0 0 10px 0;
+}
+
+.task-card button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* DELETE BUTTON */
+.delete-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* PRIORITY COLORS */
+.task-card.low {
+  background: #bee3f8; /* azul claro */
+}
+.task-card.medium {
+  background: #fefcbf; /* amarillo */
+}
+.task-card.high {
+  background: #fbd38d; /* naranja claro */
+}
+
+/* STATUS */
+.task-card.completed {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+/* MODAL */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  width: 400px;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  cursor: pointer;
+}

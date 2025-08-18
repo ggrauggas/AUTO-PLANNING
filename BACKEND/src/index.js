@@ -1,8 +1,11 @@
 // Importar dependencias
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-require("dotenv").config();
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import dotenv from "dotenv";
+
+// Inicializar dotenv
+dotenv.config();
 
 // Inicializar la app
 const app = express();
@@ -12,9 +15,8 @@ app.use(cors());
 app.use(express.json());
 
 // Importar rutas
-const tasksRouter = require("./routes/tasks");
+import tasksRouter from "./routes/tasks.js";
 app.use("/tasks", tasksRouter);
-
 
 // Variables de entorno
 const PORT = process.env.PORT || 4000;
