@@ -1,19 +1,9 @@
-// src/components/TaskFormPopup.js
+// src/components/TaskFormPopUp.js
 import { useState } from "react";
-import {
-  Modal,
-  Box,
-  Typography,
-  TextField,
-  Select,
-  MenuItem,
-  Button,
-  IconButton,
-} from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
+import "./TaskFormPopUp.css"; // Archivo CSS específico para este componente
 
-export default function TaskFormPopup({ open, handleClose, onTaskCreated }) {
+export default function TaskFormPopUp({ open, onClose, onTaskCreated }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("medium");
@@ -30,71 +20,71 @@ export default function TaskFormPopup({ open, handleClose, onTaskCreated }) {
       setTitle("");
       setDescription("");
       setPriority("medium");
-      handleClose();
+      onClose();
     } catch (err) {
       console.error(err);
     }
   };
 
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "#f9f9f9",
-    borderRadius: 3,
-    boxShadow: 24,
-    p: 4,
-    display: "flex",
-    flexDirection: "column",
-    gap: 2,
-  };
+  if (!open) return null;
 
   return (
-    <Modal open={open} onClose={handleClose}>
-      <Box sx={style}>
-        <Box display="flex" justifyContent="space-between" alignItems="center">
-          <Typography variant="h6">Añadir Nueva Tarea</Typography>
-          <IconButton onClick={handleClose}>
-            <CloseIcon />
-          </IconButton>
-        </Box>
+    <div className="custom-modal-overlay">
+      <div className="custom-modal">
+        <div className="custom-modal-header">
+          <h2>Nueva Tarea</h2>
+          <button className="custom-close-btn" onClick={onClose}>
+            ✕
+          </button>
+        </div>
 
-        <TextField
-          label="Título"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          fullWidth
-          required
-        />
-        <TextField
-          label="Descripción"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          fullWidth
-          multiline
-          rows={3}
-        />
-        <Select
-          value={priority}
-          onChange={(e) => setPriority(e.target.value)}
-          fullWidth
-        >
-          <MenuItem value="low">Baja</MenuItem>
-          <MenuItem value="medium">Media</MenuItem>
-          <MenuItem value="high">Alta</MenuItem>
-        </Select>
+        <form onSubmit={handleSubmit} className="custom-task-form">
+          <div className="form-group">
+            <label htmlFor="title">Título</label>
+            <input
+              id="title"
+              type="text"
+              placeholder="Ingresa el título de la tarea"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
+          </div>
 
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleSubmit}
-          fullWidth
-        >
-          Añadir Tarea
-        </Button>
-      </Box>
-    </Modal>
+          <div className="form-group">
+            <label htmlFor="description">Descripción</label>
+            <textarea
+              id="description"
+              placeholder="Describe los detalles de la tarea"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              rows={4}
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="priority">Prioridad</label>
+            <select
+              id="priority"
+              value={priority}
+              onChange={(e) => setPriority(e.target.value)}
+            >
+              <option value="low">Baja</option>
+              <option value="medium">Media</option>
+              <option value="high">Alta</option>
+            </select>
+          </div>
+
+          <div className="form-actions">
+            <button type="button" className="cancel-btn" onClick={onClose}>
+              Cancelar
+            </button>
+            <button type="submit" className="submit-btn">
+              Guardar Tarea
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 }

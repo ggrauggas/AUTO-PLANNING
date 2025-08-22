@@ -1,121 +1,603 @@
-body {
-  font-family: "Segoe UI", sans-serif;
-  background: #f4f6f9;
+/* App.css */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap');
+
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 .app {
-  max-width: 1200px;
-  margin: 40px auto;
+  min-height: 100vh;
+  background-color: #AFEEEE; /* Color Tiffany */
   padding: 20px;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
-h1 {
+/* Header */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 24px;
+  border: 1px solid #d1ecf1;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logo-img {
+  width: 80px;
+  height: 80px;
+  transform: scale(2);
+  margin: 20px;
+  border: none !important;
+  outline: none;
+  box-shadow: none;
+}
+
+.app-header h1 {
+  color: #008b8b; /* Azul Tiffany oscuro */
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+}
+
+/* Menú de usuario */
+.user-menu {
+  position: relative;
+}
+
+.menu-btn {
+  background: #008b8b; /* Tiffany azul */
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.menu-btn:hover {
+  background: #006666; /* Tiffany azul más oscuro */
+  transform: rotate(90deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 60px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  width: 200px;
+  z-index: 1000;
+  overflow: hidden;
+  border: 1px solid #d1ecf1;
+}
+
+.menu-item {
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.2s;
+  color: #008b8b; /* Azul Tiffany */
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 600;
+}
+
+.menu-item:hover {
+  background: #e0f7fa;
+}
+
+.menu-item i {
+  font-style: normal;
+  width: 20px;
   text-align: center;
-  margin-bottom: 20px;
+}
+
+/* Iconos personalizados */
+.icon-user:before {
+  content: "👤";
+}
+
+.icon-settings:before {
+  content: "⚙️";
+}
+
+.icon-info:before {
+  content: "ℹ️";
+}
+
+.icon-logout:before {
+  content: "🚪";
+}
+
+/* Dashboard de estadísticas */
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+  border: 1px solid #d1ecf1;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-card h3 {
+  margin: 0 0 10px 0;
+  color: #008b8b; /* Azul Tiffany */
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #008b8b; /* Azul Tiffany */
+  font-family: 'Playfair Display', serif;
+}
+
+.stat-number.completed {
+  color: #008b8b; /* Azul Tiffany */
+}
+
+.stat-number.pending {
+  color: #ff6b6b; /* Rojo suave para pendientes */
+}
+
+/* Barra de controles */
+.controls-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 24px;
+  border: 1px solid #d1ecf1;
+}
+
+.search-box {
+  position: relative;
+  flex: 1;
+  min-width: 250px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 16px 12px 40px;
+  border: 1px solid #d1ecf1;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #008b8b; /* Azul Tiffany */
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #008b8b; /* Azul Tiffany */
+  box-shadow: 0 0 0 2px rgba(0, 139, 139, 0.2);
+}
+
+.search-input::placeholder {
+  color: #88c6cc; /* Tiffany más claro */
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #008b8b; /* Azul Tiffany */
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.filter-btn {
+  padding: 8px 16px;
+  border: 1px solid #d1ecf1;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: #008b8b; /* Azul Tiffany */
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 600;
+}
+
+.filter-btn:hover {
+  background: #e0f7fa;
+}
+
+.filter-btn.active {
+  background: #008b8b; /* Azul Tiffany */
+  color: white;
+  border-color: #008b8b; /* Azul Tiffany */
 }
 
 .add-btn {
-  display: block;
-  margin: 0 auto 20px auto;
-  background: #3182ce;
+  background: #008b8b; /* Azul Tiffany */
   color: white;
   border: none;
-  padding: 12px 18px;
+  padding: 12px 24px;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 .add-btn:hover {
-  background: #2b6cb0;
+  background: #006666; /* Tiffany azul más oscuro */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* GRID */
-.task-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 15px;
+/* Responsive */
+@media (max-width: 768px) {
+  .app {
+    padding: 10px;
+  }
+  
+  .controls-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .filter-buttons {
+    justify-content: center;
+  }
+  
+  .logo-img {
+    transform: scale(1.5);
+  }
+  
+  .app-header {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+  
+  .header-left {
+    flex-direction: column;
+  }
 }
 
-/* CARDS */
-.task-card {
-  position: relative;
-  padding: 15px;
-  border-radius: 10px;
-  color: #2d3748;
+/* Estilos para la lista de tareas (TaskList) */
+.task-list-container {
   background: white;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #d1ecf1;
 }
 
-.task-card h3 {
-  margin: 0 0 10px 0;
+.task-item {
+  background: white;
+  border: 1px solid #d1ecf1;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
 }
 
-.task-card button {
-  margin-top: 10px;
-  padding: 8px 12px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+.task-item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
-/* DELETE BUTTON */
-.delete-btn {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: transparent;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
+.task-item.completed {
+  background-color: #e0f7fa;
+  border-left: 4px solid #008b8b;
 }
 
-/* PRIORITY COLORS */
-.task-card.low {
-  background: #bee3f8; /* azul claro */
-}
-.task-card.medium {
-  background: #fefcbf; /* amarillo */
-}
-.task-card.high {
-  background: #fbd38d; /* naranja claro */
+.task-title {
+  color: #008b8b;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  margin-bottom: 8px;
 }
 
-/* STATUS */
-.task-card.completed {
-  text-decoration: line-through;
-  opacity: 0.7;
+.task-description {
+  color: #5a9094;
+  font-family: 'Source Sans Pro', sans-serif;
+  margin-bottom: 12px;
 }
 
-/* MODAL */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
+.task-actions {
   display: flex;
-  justify-content: center;
+  gap: 8px;
+}
+
+.task-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-edit {
+  background: #008b8b;
+  color: white;
+}
+
+.btn-edit:hover {
+  background: #006666;
+}
+
+.btn-delete {
+  background: #ff6b6b;
+  color: white;
+}
+
+.btn-delete:hover {
+  background: #ff5252;
+}
+
+.btn-complete {
+  background: #20bf6b;
+  color: white;
+}
+
+.btn-complete:hover {
+  background: #1da85a;
+}
+/* Contenedor de la lista de tareas */
+.task-list-container {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #d1ecf1;
+  margin-top: 20px;
+}
+
+.task-list-container h2 {
+  color: #008b8b;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Grid de tareas */
+.tasks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* Item de tarea individual */
+.task-item {
+  background: white;
+  border: 1px solid #d1ecf1;
+  border-radius: 8px;
+  padding: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.task-item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.task-item.completed {
+  background-color: #e0f7fa;
+  border-left: 4px solid #008b8b;
+}
+
+/* Encabezado de tarea */
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.task-title {
+  color: #008b8b;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  margin: 0;
+  flex: 1;
+  margin-right: 10px;
+}
+
+.priority-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.priority-badge.high {
+  background-color: #ffebee;
+  color: #d32f2f;
+}
+
+.priority-badge.medium {
+  background-color: #fff8e1;
+  color: #ff8f00;
+}
+
+.priority-badge.low {
+  background-color: #e8f5e9;
+  color: #388e3c;
+}
+
+/* Descripción de tarea */
+.task-description {
+  color: #5a9094;
+  font-family: 'Source Sans Pro', sans-serif;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+/* Pie de tarea */
+.task-footer {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
-.modal-content {
-  background: white;
-  padding: 25px;
-  border-radius: 12px;
-  width: 400px;
-  position: relative;
+.status {
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
 }
 
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 12px;
+.status.completed {
+  background-color: #e8f5e9;
+  color: #388e3c;
+}
+
+.status.pending {
+  background-color: #ffecb3;
+  color: #ff8f00;
+}
+
+.task-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.action-btn {
+  background: none;
   border: none;
-  background: transparent;
-  font-size: 18px;
   cursor: pointer;
+  font-size: 1.2rem;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.action-btn:hover {
+  background-color: #f5f5f5;
+}
+
+.action-btn.delete:hover {
+  background-color: #ffebee;
+}
+
+.action-btn.complete:hover {
+  background-color: #e8f5e9;
+}
+
+.action-btn.edit:hover {
+  background-color: #e3f2fd;
+}
+
+/* Formulario de edición */
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.edit-input, .edit-textarea, .edit-select {
+  padding: 8px 12px;
+  border: 1px solid #d1ecf1;
+  border-radius: 4px;
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #008b8b;
+}
+
+.edit-input:focus, .edit-textarea:focus, .edit-select:focus {
+  outline: none;
+  border-color: #008b8b;
+  box-shadow: 0 0 0 2px rgba(0, 139, 139, 0.2);
+}
+
+.edit-textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.save-btn, .cancel-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 600;
+}
+
+.save-btn {
+  background-color: #008b8b;
+  color: white;
+}
+
+.save-btn:hover {
+  background-color: #006666;
+}
+
+.cancel-btn {
+  background-color: #e0e0e0;
+  color: #757575;
+}
+
+.cancel-btn:hover {
+  background-color: #d4d4d4;
+}
+
+/* Estado vacío */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #88c6cc;
+}
+
+.empty-state p {
+  font-size: 1.2rem;
+  font-style: italic;
 }
